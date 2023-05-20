@@ -1,0 +1,37 @@
+NUMBERS = {
+    '0': 'zero',
+    '1': 'one',
+    '2': 'two',
+    '3': 'three',
+    '4': 'four',
+    '5': 'five',
+    '6': 'six',
+    '7': 'seven',
+    '8': 'eight',
+    '9': 'nine'
+}
+
+Открыть файл для чтения
+with open('input.txt', 'r') as file:
+    # Читать файл блоками по 1024 символа
+    while True:
+        block = file.read(1024)
+        if not block:
+            break
+
+Искать числа в блоке
+        numbers = re.findall(r'\b\d+\b', block, re.IGNORECASE)
+
+Преобразовать числа
+        for number in numbers:
+            # Проверить, является ли число четным
+            if int(number) % 2 == 0:
+                # Заменить первую цифру числа на английскую цифру прописью
+                first_digit = number[0]
+                english_digit = NUMBERS[first_digit]
+                new_number = english_digit + number[1:]
+                # Вывести преобразованное число на экран
+                print(new_number)
+            else:
+                # Вывести число без изменений на экран
+                print(number)
